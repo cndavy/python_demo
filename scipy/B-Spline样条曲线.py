@@ -12,7 +12,7 @@ f_linear = interpolate.interp1d(x, y)
 tck = interpolate.splrep(x, y)
 y_bspline = interpolate.splev(x_new, tck)
 
-pl.plot(x, y  , "o" , label=u"原始数据")
+pl.plot(x, y, "o", label=u"原始数据")
 pl.plot(x_new, f_linear(x_new), label=u"line线性插值")
 pl.plot(x_new, y_bspline, label=u"B-spline插值")
 pl.legend()

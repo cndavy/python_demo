@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from time import sleep
+
+
 __author__ = 'han'
 from lettuce import *
 from lettuce_webdriver.util import assert_false
@@ -16,6 +19,14 @@ def click_button(browser, attribute):
     elems = browser.find_elements_by_xpath(xpath)
     return elems[0] if elems else False
 
+def searchword(browser,attribute):
+    xpath = "//a[em]"
+    elems = browser.find_elements_by_xpath(xpath)
+    for elem in elems:
+        if attribute in elem.text:
+            return True
+
+    return   False
 
 # 定位输入框输入关键字
 @step('I fill in field with id "(.*?)" with "(.*?)"')
@@ -33,6 +44,15 @@ def baidu_click(step, field_name):
         click_field = click_button(world.browser, field_name)
         click_field.click()
 
+
+
+
+@step('I should see "(.*?)" within (\d+) second')
+def  baidu_check(step,text1,time):
+     with AssertContextManager(step):
+         waiting=int(time)
+         sleep(waiting)
+         word=searchword(world.browser,text1)
 
 #关闭浏览器
 
